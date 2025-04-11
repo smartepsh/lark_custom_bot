@@ -1,3 +1,6 @@
+![Hex.pm Version](https://img.shields.io/hexpm/v/lark_custom_bot?style=plastic&link=https%3A%2F%2Fhex.pm%2Fpackages%2Flark_custom_bot)
+![Hex.pm License](https://img.shields.io/hexpm/l/lark_custom_bot)
+
 # LarkCustomBot
 
 **TODO: Add description**

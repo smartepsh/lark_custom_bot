@@ -43,11 +43,27 @@ Just simply support 2 type cards:
 1. Text
 
 ```elixir
-%{type: :text, text: "your text", at_all: "optional boolean"}
+%{
+  type: :text,
+  text: "your text",
+  at_all: "optional boolean"
+}
 ```
 
 2. Post
 
 ```elixir
-%{type: :post, locale: "zh_cn or en_us", title: "optional", content: [%{tag: "a or text", text: "your text", herf: "optional for tag - text"}]}
+%{
+  type: :post,
+  locale: "zh_cn or en_us",
+  title: "optional",
+  at_all: "optional boolean",
+  content: [
+    %{tag: "a or text", text: "your text", herf: "optional for tag - text"}
+  ]
+}
 ```
+
+## Further More
+
+- [ ] [Interactive lark card](https://open.feishu.cn/document/client-docs/bot-v3/add-custom-bot#5a997364)

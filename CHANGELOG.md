@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## 0.2.0 - 2025-04-12
+
 ### Added
 
 - [Auth] add Auth module to sign the message.

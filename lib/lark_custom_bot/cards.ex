@@ -1,5 +1,7 @@
 defmodule LarkCustomBot.Cards do
-  def new(_card) do
-    {:ok, %{}}
+  alias LarkCustomBot.Cards.Card
+
+  def new(card) do
+    Card.load(card)
   end
 end

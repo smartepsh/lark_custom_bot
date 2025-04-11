@@ -3,22 +3,51 @@
 
 # LarkCustomBot
 
-**TODO: Add description**
+A simple package to send custom bot webhook message with signature to Lark.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `lark_custom_bot` to your list of dependencies in `mix.exs`:
+By adding `lark_custom_bot` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:lark_custom_bot, "~> 0.1.0"}
+    {:lark_custom_bot, "~> 0.1"}
   ]
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/lark_custom_bot>.
+## Usage
 
+### Caller
+
+```elixir
+LarkCustomBot.call(webhook_url, secret, card_params)
+
+# or
+
+LarkCustomBot.call(card, config \\ config)
+
+# which config is a keyword list,
+# or by set them in config.exs
+
+config :lark_custom_bot,
+  secret: "secret",
+  url: "webhook_url"
+```
+
+### Card Params
+
+Just simply support 2 type cards:
+
+1. Text
+
+```elixir
+%{type: :text, text: "your text", at_all: "optional boolean"}
+```
+
+2. Post
+
+```elixir
+%{type: :post, locale: "zh_cn or en_us", title: "optional", content: [%{tag: "a or text", text: "your text", herf: "optional for tag - text"}]}
+```

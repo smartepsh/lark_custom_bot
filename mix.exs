@@ -51,6 +51,9 @@ defmodule LarkCustomBot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ecto, "~> 3.0"},
+      {:polymorphic_embed, "~> 5.0"},
+      {:jason, "~> 1.0", optional: true},
       {:req, "~> 0.5.0"},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false}
     ]

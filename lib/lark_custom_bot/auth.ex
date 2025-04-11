@@ -18,7 +18,17 @@ defmodule LarkCustomBot.Auth do
     timestamp =
       opts |> Keyword.get(:now, DateTime.utc_now()) |> DateTime.to_unix() |> Integer.to_string()
 
-    Map.merge(payload, %{
+    json_mod =
+      cond do
+        Code.ensure_loaded?(JSON) -> JSON
+        Code.ensure_loaded?(Jason) -> Jason
+        true -> raise "No JSON library found"
+      end
+
+    payload
+    |> json_mod.encode!()
+    |> json_mod.decode!()
+    |> Map.merge(%{
       "timestamp" => timestamp,
       "sign" => :crypto.mac(:hmac, :sha256, "#{timestamp}\n#{secret}", "") |> Base.encode64()
     })

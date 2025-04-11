@@ -1,0 +1,5 @@
+import Config
+
+if "#{config_env()}.secret.exs" |> Path.expand(__DIR__) |> File.exists?() do
+  import_config "#{config_env()}.secret.exs"
+end

@@ -26,4 +26,6 @@ lark_custom_bot-*.tar
 /tmp/
 .aider*
 
-docs/
+/docs/
+
+/config/*.secret.exs

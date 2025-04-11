@@ -24,3 +24,4 @@ lark_custom_bot-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+.aider*

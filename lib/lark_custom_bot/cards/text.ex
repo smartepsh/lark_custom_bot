@@ -16,4 +16,36 @@ defmodule LarkCustomBot.Cards.Text do
     |> cast(params, [:at_all, :text])
     |> validate_required([:text])
   end
+
+  if Code.ensure_loaded?(JSON) do
+    defimpl JSON.Encoder do
+      def encode(%{at_all: at_all, text: text}, opts) do
+        text =
+          if at_all do
+            "<at user_id=\"all\">所有人</at> #{text}"
+          else
+            text
+          end
+
+        %{text: text}
+        |> JSON.Encode.map(opts)
+      end
+    end
+  end
+
+  if Code.ensure_loaded?(Jason) do
+    defimpl Jason.Encoder do
+      def encode(%{at_all: at_all, text: text}, opts) do
+        text =
+          if at_all do
+            "<at user_id=\"all\">所有人</at> #{text}"
+          else
+            text
+          end
+
+        %{text: text}
+        |> Jason.Encode.map(opts)
+      end
+    end
+  end
 end

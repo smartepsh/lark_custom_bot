@@ -9,3 +9,4 @@
 - [Auth] add Auth module to sign the message.
 - [Request] implement POST request to lark.
 - [Card] setup schema and validation for card.
+- [Card] setup encoder protocol to do some parameter transformer.

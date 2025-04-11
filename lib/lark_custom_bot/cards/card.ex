@@ -67,4 +67,22 @@ defmodule LarkCustomBot.Cards.Card do
       end)
     end)
   end
+
+  if Code.ensure_loaded?(JSON) do
+    defimpl JSON.Encoder do
+      def encode(data, opts) do
+        %{msg_type: data.type, content: data.content}
+        |> JSON.Encode.map(opts)
+      end
+    end
+  end
+
+  if Code.ensure_loaded?(Jason) do
+    defimpl Jason.Encoder do
+      def encode(data, opts) do
+        %{msg_type: data.type, content: data.content}
+        |> Jason.Encode.map(opts)
+      end
+    end
+  end
 end

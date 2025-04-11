@@ -40,4 +40,54 @@ defmodule LarkCustomBot.Cards.Post do
       :a -> validate_required(chset, [:text, :href])
     end
   end
+
+  if Code.ensure_loaded?(JSON) do
+    defimpl JSON.Encoder do
+      def encode(%{content: content} = data, opts) do
+        content = Enum.map(content, &Map.take(&1, [:tag, :text, :href]))
+
+        content =
+          if data.at_all do
+            [%{tag: :at, user_id: :all} | content]
+          else
+            content
+          end
+
+        %{
+          post: %{
+            data.locale => %{
+              title: data.title,
+              content: [content]
+            }
+          }
+        }
+        |> JSON.Encode.map(opts)
+      end
+    end
+  end
+
+  if Code.ensure_loaded?(Jason) do
+    defimpl Jason.Encoder do
+      def encode(%{content: content} = data, opts) do
+        content = Enum.map(content, &Map.take(&1, [:tag, :text, :href]))
+
+        content =
+          if data.at_all do
+            [%{tag: :at, user_id: :all} | content]
+          else
+            content
+          end
+
+        %{
+          post: %{
+            data.locale => %{
+              title: data.title,
+              content: [content]
+            }
+          }
+        }
+        |> Jason.Encode.map(opts)
+      end
+    end
+  end
 end

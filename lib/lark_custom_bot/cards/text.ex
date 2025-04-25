@@ -18,7 +18,7 @@ defmodule LarkCustomBot.Cards.Text do
   end
 
   if Code.ensure_loaded?(JSON) do
-    defimpl JSON.Encoder do
+    defimpl JSON.Encoder, for: __MODULE__ do
       def encode(%{at_all: at_all, text: text}, opts) do
         text =
           if at_all do
@@ -27,14 +27,13 @@ defmodule LarkCustomBot.Cards.Text do
             text
           end
 
-        %{text: text}
-        |> JSON.Encode.map(opts)
+        JSON.encode_to_iodata!(%{text: text})
       end
     end
   end
 
   if Code.ensure_loaded?(Jason) do
-    defimpl Jason.Encoder do
+    defimpl Jason.Encoder, for: __MODULE__ do
       def encode(%{at_all: at_all, text: text}, opts) do
         text =
           if at_all do

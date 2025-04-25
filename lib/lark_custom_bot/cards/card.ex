@@ -69,16 +69,16 @@ defmodule LarkCustomBot.Cards.Card do
   end
 
   if Code.ensure_loaded?(JSON) do
-    defimpl JSON.Encoder do
+    defimpl JSON.Encoder, for: __MODULE__ do
       def encode(data, opts) do
         %{msg_type: data.type, content: data.content}
-        |> JSON.Encode.map(opts)
+        |> JSON.encode_to_iodata!()
       end
     end
   end
 
   if Code.ensure_loaded?(Jason) do
-    defimpl Jason.Encoder do
+    defimpl Jason.Encoder, for: __MODULE__ do
       def encode(data, opts) do
         %{msg_type: data.type, content: data.content}
         |> Jason.Encode.map(opts)

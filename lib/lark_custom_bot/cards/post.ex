@@ -42,7 +42,7 @@ defmodule LarkCustomBot.Cards.Post do
   end
 
   if Code.ensure_loaded?(JSON) do
-    defimpl JSON.Encoder do
+    defimpl JSON.Encoder, for: __MODULE__ do
       def encode(%{content: content} = data, opts) do
         content = Enum.map(content, &Map.take(&1, [:tag, :text, :href]))
 
@@ -53,7 +53,7 @@ defmodule LarkCustomBot.Cards.Post do
             content
           end
 
-        %{
+        payload = %{
           post: %{
             data.locale => %{
               title: data.title,
@@ -61,13 +61,14 @@ defmodule LarkCustomBot.Cards.Post do
             }
           }
         }
-        |> JSON.Encode.map(opts)
+
+        JSON.encode_to_iodata!(payload)
       end
     end
   end
 
   if Code.ensure_loaded?(Jason) do
-    defimpl Jason.Encoder do
+    defimpl Jason.Encoder, for: __MODULE__ do
       def encode(%{content: content} = data, opts) do
         content = Enum.map(content, &Map.take(&1, [:tag, :text, :href]))
 

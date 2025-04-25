@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## 0.2.1 - 2025-04-25
+
+### Fiexed
+
+- [JSONEncoder] fix encoder
+
 ## 0.2.0 - 2025-04-12
 
 ### Added
